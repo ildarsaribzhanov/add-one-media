@@ -13,6 +13,9 @@ function my_plugin_enqueue_media()
 	// Подключение АПИ для работы с медиабиблиотекой
 	wp_enqueue_media();
 	
+	// Стили
+	wp_enqueue_style('adder-one-media', plugins_url('/css/adder-one-media.css', __FILE__));
+	
 	// Скрипт для выбора файла
 	wp_enqueue_script('adder-one-media.js', plugins_url('/js/adder-one-media.js', __FILE__), array('jquery'));
 }
