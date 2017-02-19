@@ -14,10 +14,10 @@ function my_plugin_enqueue_media()
 	wp_enqueue_media();
 	
 	// Стили
-	wp_enqueue_style('adder-one-media', plugins_url('/css/adder-one-media.css', __FILE__));
+	wp_enqueue_style('add-one-media', plugins_url('/css/add-one-media.css', __FILE__));
 	
 	// Скрипт для выбора файла
-	wp_enqueue_script('adder-one-media.js', plugins_url('/js/adder-one-media.js', __FILE__), array('jquery'));
+	wp_enqueue_script('add-one-media.js', plugins_url('/js/add-one-media.js', __FILE__), array('jquery'));
 }
 
 add_action('admin_enqueue_scripts', 'my_plugin_enqueue_media');
@@ -26,18 +26,18 @@ add_action('admin_enqueue_scripts', 'my_plugin_enqueue_media');
 /**
  * Создание блока метаполей для постов
  */
-function adder_one_meta()
+function add_one_meta()
 {
-	add_meta_box('adder_one_meta', 'Прикрепленный файл', 'adder_one_meta_view', 'post');
+	add_meta_box('add_one_meta', 'Прикрепленный файл', 'add_one_meta_view', 'post');
 }
 
-add_action('add_meta_boxes', 'adder_one_meta');
+add_action('add_meta_boxes', 'add_one_meta');
 
 
 /**
  * HTML код блока
  */
-function adder_one_meta_view()
+function add_one_meta_view()
 {
 	global $post;
 	
@@ -47,7 +47,7 @@ function adder_one_meta_view()
 	}
 	
 	// Используем nonce для верификации
-	wp_nonce_field(plugin_basename(__FILE__), 'adder_one_nonce');
+	wp_nonce_field(plugin_basename(__FILE__), 'add_one_nonce');
 	
 	// Заберем значение прикрепленного файла
 	$add_file_id = get_post_meta($post->ID, 'add_file_id', true);
@@ -94,7 +94,7 @@ function omsu_doc_save_postdata($post_id, $post)
 	}
 	
 	// проверяем nonce нашей страницы, потому что save_post может быть вызван с другого места.
-	if ( ! isset($_POST['adder_one_nonce']) || ! wp_verify_nonce($_POST['adder_one_nonce'],
+	if ( ! isset($_POST['add_one_nonce']) || ! wp_verify_nonce($_POST['add_one_nonce'],
 			plugin_basename(__FILE__))
 	) {
 		return $post_id;
