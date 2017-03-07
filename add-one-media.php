@@ -62,7 +62,7 @@ function add_one_meta_view()
 	
 	if ($add_file_id) :
 		$file_info = get_post($add_file_id);
-		$file_icon = wp_get_attachment_image(706, 'thumbnail', true);
+		$file_icon = wp_get_attachment_image($add_file_id, 'thumbnail', true);
 		
 		echo '<div class="add_file js-add_file_itm">
 			<input type="hidden" name="add_file_id" value="' . $add_file_id . '" />
